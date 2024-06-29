@@ -24,10 +24,17 @@ class ShopProvider extends Component {
   };
 
 
+  /**
+   * "CREAT CHECK OUT WHEN MOUNTED"
+   * if checkout_id already been created w createCheckout(), then save it in localStorage,
+   * so that whenever refreshing browser, the "Componentdidmount" function won't "create a new checkout" every time.
+   */
   componentDidMount() {
     if (localStorage.checkout_id) {
+      // fetch exsiting checkout
       this.fetchCheckout(localStorage.checkout_id)
     } else {
+      // create new checkout
       this.createCheckout()
     }
   }
@@ -98,7 +105,7 @@ class ShopProvider extends Component {
 
 
   render() {
-    console.log(this.state.checkout)
+
     return (
       <ShopContext.Provider
         value={{

@@ -3,17 +3,21 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
-
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ShopProvider from './context/shopContext'
 import { createRoot } from 'react-dom/client';
-
+import { ChakraProvider } from "@chakra-ui/react"
 const container = document.getElementById('root');
 const root = createRoot(container);
 
 root.render(
-  <ShopProvider>
-    <App />
-  </ShopProvider>
+  <ChakraProvider>
+    <ShopProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </ShopProvider>
+  </ChakraProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
