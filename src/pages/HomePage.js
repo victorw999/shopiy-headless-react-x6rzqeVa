@@ -27,18 +27,19 @@ const HomePage = () => {
 
   return (
 
-    <Box>
+    <Box className=''>
       {/* <Hero />
       <RichText heading="The relaxation you’ve been waiting for." text="Our Bath bombs guarantee a fun, relaxing, and colorful night."/> */}
-      <Grid templateColumns={['repeat(1fr)', 'repeat(3, 1fr)']}>
+      <Grid className="grid_section" templateColumns={['repeat(1fr)', 'repeat(3, 1fr)']}>
         {products.map(product => (
-          <Link to={`/products/${product.handle}`} key={product.id} >
-            <Box _hover={{ opacity: '80%' }} textAlign="center" position="relative">
+          <Link className="grid_box_link" to={`/products/${product.handle}`} key={product.id} >
+            <Box className="grid_box_box" _hover={{ opacity: '80%' }} textAlign="center" position="relative">
               <Image
+                className="grid_box_img"
                 src={product.images[0].src}
               />
-              <Text fontWeight="bold" position="absolute" bottom="15%" w="100%">{product.title}</Text>
-              <Text color="gray.500" position="absolute" bottom="5%" w="100%">${product.variants[0].price?.amount}</Text>
+              <Text className="grid_box_txt" fontWeight="bold" position="absolute" bottom="15%" w="100%">{product.title}</Text>
+              <Text className="grid_box_txt" color="gray.500" position="absolute" bottom="5%" w="100%">${product.variants[0].price?.amount}</Text>
             </Box>
           </Link>
         ))}
