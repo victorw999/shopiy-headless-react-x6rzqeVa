@@ -7,12 +7,26 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ShopProvider from './context/shopContext'
 import { createRoot } from 'react-dom/client';
-import { ChakraProvider } from "@chakra-ui/react"
+import { ChakraProvider, extendTheme } from "@chakra-ui/react"
+
+
+
 const container = document.getElementById('root');
 const root = createRoot(container);
 
+// convert chakra breakpoints to tailwind
+const breakpoints = {
+  base: '0px',
+  xs: '480px',
+  sm: '640px',
+  md: '768px',
+  lg: '1024px',
+  xl: '1280px',
+  '2xl': '1536px',
+}
+const theme = extendTheme({ breakpoints })
 root.render(
-  <ChakraProvider>
+  <ChakraProvider theme={theme}>
     <ShopProvider>
       <BrowserRouter>
         <App />

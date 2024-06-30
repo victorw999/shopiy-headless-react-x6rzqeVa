@@ -30,7 +30,7 @@ const HomePage = () => {
     <Box className=''>
       {/* <Hero />
       <RichText heading="The relaxation you’ve been waiting for." text="Our Bath bombs guarantee a fun, relaxing, and colorful night."/> */}
-      <Grid className="grid_section" templateColumns={['repeat(1fr)', 'repeat(3, 1fr)']}>
+      <Grid className="grid_section" templateColumns={['repeat(1fr)', 'repeat(2, 1fr)', 'repeat(3, 1fr)', 'repeat(4, 1fr)']}>
         {products.map(product => (
           <Link className="grid_box_link" to={`/products/${product.handle}`} key={product.id} >
             <Box className="grid_box_box" _hover={{ opacity: '80%' }} textAlign="center" position="relative">
@@ -38,8 +38,10 @@ const HomePage = () => {
                 className="grid_box_img"
                 src={product.images[0].src}
               />
-              <Text className="grid_box_txt" fontWeight="bold" position="absolute" bottom="15%" w="100%">{product.title}</Text>
-              <Text className="grid_box_txt" color="gray.500" position="absolute" bottom="5%" w="100%">${product.variants[0].price?.amount}</Text>
+              <div className="grid_txt_container">
+                <Text className="grid_box_txt product_title" fontWeight="bold" position="absolute" bottom="10%" w="100%">{product.title}</Text>
+                <Text className="grid_box_txt" color="gray.500" position="absolute" bottom="5%" w="100%">${product.variants[0].price?.amount}</Text>
+              </div>
             </Box>
           </Link>
         ))}

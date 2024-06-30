@@ -1,7 +1,22 @@
 .grid_section {
   .grid_box_link {
-    border: 10px solid #f3f3f3;
-    margin: 10px;
-    aspect-ratio: 1 / 1;
+    @apply border-2 sm:border-[5px] md:border-[10px] border-solid border-slate-100;
+    img {
+      @apply aspect-square object-cover;
+    }
+    .grid_txt_container {
+      .grid_box_txt {
+        @apply text-[12px] font-thin;
+        &.product_title {
+          @apply w-[200px] sm:w-[180px] md:sm:w-[140px] lg:w-[250px];
+          white-space: nowrap; /* Prevent text wrapping */
+          overflow: hidden; /* Hide overflowing content */
+          text-overflow: ellipsis;
+          margin: auto;
+          left: 0;
+          right: 0;
+        }
+      }
+    }
   }
 }
