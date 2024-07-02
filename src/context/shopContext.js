@@ -82,6 +82,14 @@ class ShopProvider extends Component {
     this.setState({ products: products });
   };
 
+  fetchCollection = async () => {
+    let collectionId = 'gid://shopify/Collection/121286131812'; // lululemon;
+    const products = await client.collection.fetchWithProducts(collectionId, { productsFirst: 10 }).then((collection) => {
+      console.log(collection);
+      console.log(collection.products);
+    });
+  }
+
   fetchProductWithHandle = async (handle) => {
     const product = await client.product.fetchByHandle(handle);
     this.setState({ product: product });
