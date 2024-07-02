@@ -1,3 +1,4 @@
+import { typography } from "@chakra-ui/react";
 import React, { Component } from "react";
 import Client from "shopify-buy";
 
@@ -8,20 +9,33 @@ import Client from "shopify-buy";
  */
 const ShopContext = React.createContext();
 
-const client = Client.buildClient({
-  storefrontAccessToken: process.env.REACT_APP_SHOPIFY_STOREFRONT_KEY,
-  domain: process.env.REACT_APP_SHOPIFY_DOMAIN
-});
+
 
 
 class ShopProvider extends Component {
-  state = {
-    products: [],
-    product: {},
-    checkout: {},
-    isCartOpen: false,
-    isMenuOpen: false
-  };
+
+  constructor(props) {
+    super(props)
+    console.log('000')
+    try {
+      console.log('111')
+      this.client = Client.buildClient({
+        storefrontAccessToken: process.env.REACT_APP_SHOPIFY_STOREFRONT_KEY,
+        domain: process.env.REACT_APP_SHOPIFY_DOMAIN
+      });
+    } catch (error) {
+      console.error("Error creating Shopify client:", error);
+    }
+
+    this.state = {
+      products: [],
+      product: {},
+      checkout: {},
+      isCartOpen: false,
+      isMenuOpen: false
+    };
+  }
+
 
 
   /**
@@ -30,23 +44,32 @@ class ShopProvider extends Component {
    * so that whenever refreshing browser, the "Componentdidmount" function won't "create a new checkout" every time.
    */
   componentDidMount() {
-    if (localStorage.checkout_id) {
-      // fetch exsiting checkout
-      this.fetchCheckout(localStorage.checkout_id)
-    } else {
-      // create new checkout
-      this.createCheckout()
+    try {
+      if (localStorage.checkout_id) {
+        // fetch exsiting checkout
+        this.fetchCheckout(localStorage.checkout_id)
+      } else {
+        // create new checkout
+        this.createCheckout()
+      }
+    } catch (error) {
+      console.error("Error occurred in componentDidMount:", error);
     }
   }
 
   createCheckout = async () => {
-    const checkout = await client.checkout.create();
-    localStorage.setItem("checkout_id", checkout.id)
-    this.setState({ checkout: checkout });
+    try {
+      const checkout = await this.client.checkout.create();
+      localStorage.setItem("checkout_id", checkout.id)
+      this.setState({ checkout: checkout });
+    } catch (error) {
+      console.error('createCheckout()', error)
+    }
   };
 
   fetchCheckout = async (checkoutId) => {
-    client.checkout
+    console.log('fetchCheckout()')
+    this.client.checkout
       .fetch(checkoutId)
       .then((checkout) => {
         this.setState({ checkout: checkout });
@@ -55,46 +78,61 @@ class ShopProvider extends Component {
   };
 
   addItemToCheckout = async (variantId, quantity) => {
-    const lineItemsToAdd = [
-      {
-        variantId,
-        quantity: parseInt(quantity, 10),
-      },
-    ];
-    const checkout = await client.checkout.addLineItems(
-      this.state.checkout.id,
-      lineItemsToAdd
-    );
-    this.setState({ checkout: checkout });
+    try {
+      const lineItemsToAdd = [
+        {
+          variantId,
+          quantity: parseInt(quantity, 10),
+        },
+      ];
+      const checkout = await this.client.checkout.addLineItems(
+        this.state.checkout.id,
+        lineItemsToAdd
+      );
+      this.setState({ checkout: checkout });
 
-    this.openCart();
+      this.openCart();
+    } catch (error) {
+      console.error('addItemToCheckout() error:', error)
+    }
   };
 
   removeLineItem = async (lineItemIdsToRemove) => {
     const checkoutId = this.state.checkout.id
-
-    client.checkout.removeLineItems(checkoutId, lineItemIdsToRemove)
-      .then(checkout => this.setState({ checkout }))
+    try {
+      this.client.checkout.removeLineItems(checkoutId, lineItemIdsToRemove)
+        .then(checkout => this.setState({ checkout }))
+    } catch (error) {
+      console.error('removeLineItem() error:', error)
+    }
   }
 
   fetchAllProducts = async () => {
-    const products = await client.product.fetchAll();
-    this.setState({ products: products });
+    try {
+      const products = await this.client.product.fetchAll();
+      this.setState({ products: products });
+    } catch (error) {
+      console.error('fetchAllProducts() error:', error)
+    }
+
   };
 
   fetchCollection = async () => {
     let collectionId = 'gid://shopify/Collection/121286131812'; // lululemon;
-    const products = await client.collection.fetchWithProducts(collectionId, { productsFirst: 10 }).then((collection) => {
+    const products = await this.client.collection.fetchWithProducts(collectionId, { productsFirst: 10 }).then((collection) => {
       console.log(collection);
       console.log(collection.products);
     });
   }
 
   fetchProductWithHandle = async (handle) => {
-    const product = await client.product.fetchByHandle(handle);
-    this.setState({ product: product });
-
-    return product;
+    try {
+      const product = await this.client.product.fetchByHandle(handle);
+      this.setState({ product: product });
+      return product;
+    } catch (error) {
+      console.error('fetchProductWithHandle()', error)
+    }
   };
 
   closeCart = () => {
