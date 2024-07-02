@@ -1,5 +1,5 @@
 .grid_section {
-  @apply max-w-0 md:max-w-[1300px] m-auto;
+  @apply max-w-full md:max-w-[1300px] m-auto;
   .grid_box_link {
     @apply border-2 sm:border-[5px] md:border-[10px] border-solid border-[var(--bg-color)];
     img {
