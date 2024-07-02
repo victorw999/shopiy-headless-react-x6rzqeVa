@@ -24,7 +24,17 @@ const breakpoints = {
   xl: '1280px',
   '2xl': '1536px',
 }
-const theme = extendTheme({ breakpoints })
+const fonts = {
+  fonts: {
+    heading: `'Playfair Display', 'Anybody', sans-serif`,
+    body: `'Quicksand', sans-serif`,
+  }
+}
+
+const theme = extendTheme({
+  breakpoints, ...fonts
+})
+
 root.render(
   <ChakraProvider theme={theme}>
     <ShopProvider>

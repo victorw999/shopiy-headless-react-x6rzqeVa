@@ -54,7 +54,7 @@ const Cart = () => {
                       </Box>
                       <Box>
                         <Text height="100%" display="flex" align="center" justifyContent="center">
-                          {item.variant.price}
+                          {item.variant.price.amount}
                         </Text>
                       </Box>
                     </Grid>

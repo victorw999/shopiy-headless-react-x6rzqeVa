@@ -34,12 +34,15 @@ const ProductPage = () => {
           </Flex>
           <Box px="2rem" display="flex" flexDir="column" alignItems="center" justifyContent="center">
             <Heading pb="2rem">{product.title}</Heading>
-            <Text fontWeight="bold" pb="2rem">${product.variants[0].price}</Text>
+            <Text fontWeight="bold" pb="2rem">${product.variants[0].price?.amount}</Text>
             <Text color="gray.500" pb="2rem">{product.description}</Text>
             <Button w="10rem" backgroundColor="#FF38BD" color="white" _hover={{ opacity: '70%' }}
-              onClick={() => addItemToCheckout(product.variants[0].id, 1)}>
+              onClick={() => {
+                // debugger
+                addItemToCheckout(product.variants[0].id, 1)
+              }}>
               Add To Cart
-          </Button>
+            </Button>
           </Box>
         </Grid>
       </Box>
@@ -53,7 +56,7 @@ const ProductPage = () => {
                 src={product.images[0].src}
               />
               <Text fontWeight="bold" position="absolute" bottom="15%" w="100%">{product.title}</Text>
-              <Text position="absolute" bottom="5%" w="100%">${product.variants[0].price}</Text>
+              <Text position="absolute" bottom="5%" w="100%">${product.variants[0].price?.amount}</Text>
             </Box>
           </Link>
         ))}

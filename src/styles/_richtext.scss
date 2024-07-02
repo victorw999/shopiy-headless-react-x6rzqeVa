@@ -1,0 +1,47 @@
+.richtext_container {
+  background-color: var(--bg-color);
+  padding: 20px;
+  .richtext_inner {
+    @apply max-w-full md:max-w-[550px] m-auto;
+    .richtext_txt_head {
+      @apply p-5 md:py-5 md:px-0;
+    }
+    .richtext_txt_body {
+      @apply px-0 xs:px-5 sm:px-7;
+      // add click to reveal animation
+      --lineheight: 24px;
+      --pad-bottom: 2.5rem;
+
+      display: -webkit-box;
+      line-clamp: 2;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      position: relative;
+      max-height: calc(var(--lineheight) * 2);
+      line-height: var(--lineheight);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding-bottom: calc(var(--pad-bottom) + var(--lineheight) * 2);
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: calc(100% - var(--lineheight) * 2);
+        background: linear-gradient(to bottom, var(--bg-color-rgba-95) 0%, var(--bg-color-rgba-100) 100%);
+        transition: opacity 0.7s ease-in-out;
+        opacity: 1;
+      }
+      &.clamp {
+        max-height: unset;
+        line-clamp: unset;
+        -webkit-line-clamp: unset;
+        padding-bottom: var(--pad-bottom);
+        &::after {
+          opacity: 0;
+        }
+      }
+    } //.richtext_txt_body
+  }
+}

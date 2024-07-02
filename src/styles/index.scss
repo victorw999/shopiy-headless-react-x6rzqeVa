@@ -3,11 +3,31 @@
 @tailwind utilities;
 
 @import "./grid_section";
+@import "./homepage";
+@import "./richtext";
+
+:root {
+  --font-color: black;
+  --bg-color: #f6f6f6;
+  --bg-color-rgba-100: rgba(246, 246, 246, 1);
+  --bg-color-rgba-95: rgba(246, 246, 246, 0.95);
+}
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
-    "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family:
+    "Quicksand",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "Roboto",
+    "Oxygen",
+    "Ubuntu",
+    "Cantarell",
+    "Fira Sans",
+    "Droid Sans",
+    "Helvetica Neue",
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

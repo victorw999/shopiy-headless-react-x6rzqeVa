@@ -5,7 +5,7 @@ import { Grid, Box, Text, Image, VStack } from "@chakra-ui/react"
 const Footer = () => {
   return (
     <Box backgroundColor="#FFA8E2">
-      <Grid templateColumns={["repeat(1, 1fr)","repeat(3, 1fr)"]} color="white" fontWeight='bold'>
+      <Grid templateColumns={["repeat(1, 1fr)", "repeat(3, 1fr)"]} color="white" fontWeight='bold'>
         <Image src="https://cdn.shopify.com/s/files/1/0472/5705/9496/files/Bath_Bomb_-_Product-5_-_trans_1.png?v=1610123549" />
         <VStack p="2rem">
           <Link to="/">The Green Blast</Link>
@@ -20,7 +20,7 @@ const Footer = () => {
       </Grid>
       <Box>
         <Text textAlign="center" color="white" w="100%" borderTop="1px solid white" p="1rem">
-          © Copyright www.workingwithshopify.com
+          © Copyright
         </Text>
       </Box>
     </Box>
