@@ -16,7 +16,6 @@ const ProductPage = () => {
   }, [fetchProductWithHandle, handle])
 
   useEffect(() => {
-    console.log('ProductPage---')
     fetchAllProducts()
     return () => {
 
@@ -40,7 +39,8 @@ const ProductPage = () => {
             <Button w="10rem" backgroundColor="#FF38BD" color="white" _hover={{ opacity: '70%' }}
               onClick={() => {
                 // debugger
-                addItemToCheckout(product.variants[0].id, 1)
+                console.log('===> product.variants[0].id', product.variants[0].id)
+                addItemToCheckout(product?.variants[0]?.id, 1)
               }}>
               Add To Cart
             </Button>

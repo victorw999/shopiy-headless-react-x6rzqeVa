@@ -62,11 +62,15 @@ class ShopProvider extends Component {
   };
 
   fetchCheckout = async (checkoutId) => {
-
+    // checkoutId expired: the checkoutId may expire. If this happens, a new checkout ID will need to be created.
     this.client.checkout
       .fetch(checkoutId)
       .then((checkout) => {
-        this.setState({ checkout: checkout });
+        if (checkout) {
+          this.setState({ checkout: checkout });
+        } else {
+          this.createCheckout()  // checkoutId expired, creating new checkout
+        }
       })
       .catch((error) => console.error(error));
   };
@@ -79,6 +83,7 @@ class ShopProvider extends Component {
           quantity: parseInt(quantity, 10),
         },
       ];
+
       const checkout = await this.client.checkout.addLineItems(
         this.state.checkout.id,
         lineItemsToAdd
