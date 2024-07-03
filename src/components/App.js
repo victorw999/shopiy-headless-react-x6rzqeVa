@@ -15,10 +15,11 @@ function App() {
         <NavMenu />
         <Cart />
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/products" element={<ProductList />} >
+          <Route path="/products" >
+            <Route index element={<ProductList />} />
             <Route path=":handle" element={<ProductPage />} />
           </Route>
+          <Route path="/" element={<HomePage />} />
         </Routes>
         <Footer />
       </div >

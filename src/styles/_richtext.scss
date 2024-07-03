@@ -4,7 +4,7 @@
   .richtext_inner {
     @apply max-w-full md:max-w-[550px] m-auto;
     .richtext_txt_head {
-      @apply p-5 md:py-5 md:pt-10 md:px-0;
+      @apply p-5 md:py-5 md:pt-10 md:px-0 text-[20px] md:text-[36px];
     }
   } //.richtext_inner
 
@@ -48,6 +48,10 @@
 
   .addedImg {
     @apply w-[66px] h-[66px] mt-[60px] mb-[20px] md:w-[100px] md:h-[100px] md:mt-[100px] opacity-[0.1];
+  }
+
+  &.style_1 {
+    @apply py-20;
   }
 
   &.white_bg {

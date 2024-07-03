@@ -16,6 +16,7 @@ const ProductPage = () => {
   }, [fetchProductWithHandle, handle])
 
   useEffect(() => {
+    console.log('ProductPage---')
     fetchAllProducts()
     return () => {
 

@@ -97,7 +97,7 @@ const HomePage = () => {
       {/* <RichText heading="The relaxation you’ve been waiting for." text="Our Bath bombs guarantee a fun, relaxing, and colorful night." /> */}
 
       {/* Curated to global trends, our tech-driven styles open your eyes to the future of fashion. */}
-      <RichText heading="The Future of Fashion & Beyond" text="Embrace tomorrow's trends, today. Our meticulously curated collection seamlessly blends cutting-edge fashion technology with the hottest global styles, designed to elevate your look and redefine your expectations." />
+      <RichText className='style_1 default_bg' heading="The Future of Fashion & Beyond" text="Embrace tomorrow's trends, today. Our meticulously curated collection seamlessly blends cutting-edge fashion technology with the hottest global styles, designed to elevate your look and redefine your expectations." />
 
       <Grid className="grid_section" templateColumns={['repeat(1fr)', 'repeat(2, 1fr)', 'repeat(3, 1fr)', 'repeat(4, 1fr)']}>
         {gridItems.map(item => (
@@ -115,7 +115,7 @@ const HomePage = () => {
           </Link>
         ))}
       </Grid>
-      <RichText heading="Treat yourself!" text="The cherry blossom whispers its beauty, reminding us to savor the fleeting moments of life. In the stillness of the meditation hall, a single breath becomes a vast ocean of awareness." />
+      <RichText className='default_bg' heading="Treat yourself!" text="The cherry blossom whispers its beauty, reminding us to savor the fleeting moments of life. In the stillness of the meditation hall, a single breath becomes a vast ocean of awareness." />
       <ImageWithText
         button
         image={unsplash[unsplash.length - 1]?.img}
