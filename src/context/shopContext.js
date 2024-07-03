@@ -8,17 +8,11 @@ import Client from "shopify-buy";
    - & the mounting process.
  */
 const ShopContext = React.createContext();
-
-
-
-
 class ShopProvider extends Component {
 
   constructor(props) {
     super(props)
-    console.log('000')
     try {
-      console.log('111')
       this.client = Client.buildClient({
         storefrontAccessToken: process.env.REACT_APP_SHOPIFY_STOREFRONT_KEY,
         domain: process.env.REACT_APP_SHOPIFY_DOMAIN
@@ -68,13 +62,13 @@ class ShopProvider extends Component {
   };
 
   fetchCheckout = async (checkoutId) => {
-    console.log('fetchCheckout()')
+
     this.client.checkout
       .fetch(checkoutId)
       .then((checkout) => {
         this.setState({ checkout: checkout });
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.error(error));
   };
 
   addItemToCheckout = async (variantId, quantity) => {
@@ -114,15 +108,20 @@ class ShopProvider extends Component {
     } catch (error) {
       console.error('fetchAllProducts() error:', error)
     }
-
   };
 
   fetchCollection = async () => {
     let collectionId = 'gid://shopify/Collection/121286131812'; // lululemon;
-    const products = await this.client.collection.fetchWithProducts(collectionId, { productsFirst: 10 }).then((collection) => {
-      console.log(collection);
-      console.log(collection.products);
+    this.client.collection.fetchWithProducts(collectionId, { productsFirst: 10 }).then((collection) => {
+      this.setState({ products: collection.products });
     });
+  }
+  fetchProducts = async (option) => {
+    if (option === 2) {
+      this.fetchCollection()
+    } else {
+      this.fetchAllProducts()
+    }
   }
 
   fetchProductWithHandle = async (handle) => {
@@ -156,7 +155,9 @@ class ShopProvider extends Component {
       <ShopContext.Provider
         value={{
           ...this.state,
+          fetchProducts: this.fetchProducts,
           fetchAllProducts: this.fetchAllProducts,
+          fetchCollection: this.fetchCollection,
           fetchProductWithHandle: this.fetchProductWithHandle,
           closeCart: this.closeCart,
           openCart: this.openCart,

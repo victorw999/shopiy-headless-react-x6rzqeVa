@@ -5,7 +5,7 @@ import Navbar from '../components/Navbar'
 import Cart from '../components/Cart'
 import NavMenu from '../components/NavMenu'
 import Footer from './Footer'
-
+import ProductList from '../pages/ProductList'
 
 function App() {
   return (
@@ -15,11 +15,13 @@ function App() {
         <NavMenu />
         <Cart />
         <Routes>
-          <Route path="/products/:handle" element={<ProductPage />} />
           <Route path="/" element={<HomePage />} />
+          <Route path="/products" element={<ProductList />} >
+            <Route path="/products/:handle" element={<ProductPage />} />
+          </Route>
         </Routes>
         <Footer />
-      </div>
+      </div >
     </>
   );
 }
