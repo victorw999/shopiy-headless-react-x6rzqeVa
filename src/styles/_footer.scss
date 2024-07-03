@@ -1,0 +1,7 @@
+.footer_container {
+  background-color: var(--bg-color);
+  @apply mt-[100px] md:mt-[100px] pt-10;
+  .social_grp {
+    @apply flex flex-row justify-evenly md:content-between md:flex-col;
+  }
+}

@@ -16,7 +16,6 @@ const fetchUnsplashImg = async (num) => {
   try {
     const response = await fetch(url);
     const data = await response.json();
-    // console.log(data);
     return data.results;
   } catch (error) {
     console.error('Error:', error);
@@ -29,10 +28,10 @@ const HomePage = () => {
   const [gridItems, setGridItems] = useState([])
   const [unsplash, setUnsplash] = useState([])
   const { fetchProducts, products } = useContext(ShopContext)
+  const NUM_OF_UNSPLASH = 10
 
   useEffect(() => {
-    console.log('===> use Effect() fetchProducts only once!')
-    fetchProducts(2)
+    fetchProducts(2) // get products frm lululemon collection
     return () => { };
   }, [])
 
@@ -40,18 +39,11 @@ const HomePage = () => {
     const combineData = async () => {
       try {
         // get # of images frm unsplash
-        const unsplashData = await fetchUnsplashImg(10);
-        setUnsplash(unsplashData);
+        const unsplashData = await fetchUnsplashImg(NUM_OF_UNSPLASH);
 
-        console.log('1 products.length', products.length)
-        console.log('useEffect() unsplashData', unsplashData)
 
         // merging:  inserting one item from each array alternately,
-
         if (products.length > 0 && unsplashData.length > 0) {
-          console.log('2 products.length', products.length)
-          // // get data from "products" (shopify API)
-
 
           let arr_1 = products.map(product => {
             return {
@@ -69,18 +61,19 @@ const HomePage = () => {
               img: i.urls.regular
             }
           })
+          setUnsplash(arr_2);
           let shorterLength = Math.min(arr_1.length, arr_2.length)
           let gridItems = [...arr_1, ...arr_2]
           gridItems = gridItems.flatMap((_, idx) => {
-            if (idx <= shorterLength) {
+            if (idx < shorterLength) {
               let pair = [arr_1[idx], arr_2[idx]]
-              console.log(`idx: ${idx}, `, pair)
               return pair
             } else {
-              return (arr_1[idx] ?? arr_2[idx])
+              // return (arr_1[idx] ?? arr_2[idx]) // stops at 8 unsplash img
             }
           }).filter(i => i != null)
-          console.log(`shorterLength: ${shorterLength} `, 'gridItems', gridItems)
+          // console.log(`shorterLength: ${shorterLength} `, 'gridItems', gridItems)
+          console.log('unsplash: ', unsplash)
           setGridItems(gridItems)
         }
 
@@ -122,18 +115,21 @@ const HomePage = () => {
           </Link>
         ))}
       </Grid>
-      <RichText heading="Treat yourself!" />
+      <RichText heading="Treat yourself!" text="The cherry blossom whispers its beauty, reminding us to savor the fleeting moments of life. In the stillness of the meditation hall, a single breath becomes a vast ocean of awareness." />
       <ImageWithText
         button
-        image="https://cdn.shopify.com/s/files/1/0472/5705/9496/files/premium-bath-bombs.jpg?v=1610066758"
-        heading="Heading"
-        text="I'm baby kale chips twee skateboard tattooed, DIY iPhone ugh mixtape tumeric unicorn narwhal. Iceland shoreditch authentic, sartorial vegan twee flannel banh mi bushwick retro farm-to-table single-origin coffee. " />
+        image={unsplash[unsplash.length - 1]?.img}
+        heading="Mahayana"
+        text="Through practices like meditation and mindfulness, Zen encourages us to let go of distractions and connect with the present moment. " />
       <ImageWithText
         reverse
         button
-        image="https://cdn.shopify.com/s/files/1/0472/5705/9496/files/bath-bomb-and-candle.jpg?v=1610066758"
-        heading="Second Heading"
-        text="I'm baby kale chips twee skateboard tattooed, DIY iPhone ugh mixtape tumeric unicorn narwhal. Iceland shoreditch authentic, sartorial vegan twee flannel banh mi bushwick retro farm-to-table single-origin coffee. " />
+        image={unsplash[unsplash.length - 2]?.img}
+        heading="A Journey"
+        text="The path to Zen is a journey, not a destination. Embrace the quiet moments, be present in your daily activities." />
+
+
+      <RichText addImg='/zen.png' className='white_bg' heading="" text="The mind, like the wind, is ever in motion. Yet, beneath the surface ripples, a deep well of stillness remains. Through meditation, we can learn to quiet the chatter and access this stillness. In this present moment, where the past has faded and the future is yet to be, lies true peace." />
     </Box>
   )
 }

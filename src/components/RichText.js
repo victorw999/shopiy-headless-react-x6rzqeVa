@@ -1,17 +1,26 @@
 import React, { useRef } from 'react'
 import { Box, Heading, Text, Center } from "@chakra-ui/react"
 
-const RichText = ({ heading, text }) => {
+const RichText = ({ heading, text, className, addImg }) => {
   const txtBodyRef = useRef(null)
   const handleBodyClick = () => {
     txtBodyRef.current.classList.toggle('clamp') // toggle reveal the rest of the paragraph
   }
   return (
-    <Box className='richtext_container' p={4}>
+    <Box className={`richtext_container ${className?.includes('white_bg') ?
+      'white_bg' : 'default_bg'
+      }`} p={4}>
       <Center className='richtext_inner' display="flex" flexDir="column" textAlign="center">
-        <Heading className='richtext_txt_head' >
-          {heading}
-        </Heading>
+
+        {(addImg != null) ? <img className='addedImg' src={addImg} will alt="" /> : ''}
+
+        {
+          heading ?
+            <Heading className='richtext_txt_head' >
+              {heading}
+            </Heading> : null
+        }
+
         {text ?
           <Text ref={txtBodyRef} className='richtext_txt_body' onClick={handleBodyClick}>
             {text}
