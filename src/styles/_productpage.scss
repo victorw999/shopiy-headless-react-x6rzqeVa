@@ -1,0 +1,8 @@
+.productpage_container {
+  .content_container {
+    @apply pt-8 md:pt-0;
+    button {
+      @apply w-full md:w-[10rem];
+    }
+  }
+}

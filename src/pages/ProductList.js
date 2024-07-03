@@ -15,7 +15,7 @@ const ProductList = () => {
   }, [])
 
   useEffect(() => {
-    const combineData = async () => {
+    const massageData = async () => {
       try {
         if (products.length > 0) {
           let arr_1 = products.map(product => {
@@ -33,7 +33,7 @@ const ProductList = () => {
         console.error('Error:', error);
       }
     };
-    combineData();
+    massageData();
     return () => { };
   }, [products])
 

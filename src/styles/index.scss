@@ -2,8 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "./btn";
 @import "./grid_section";
 @import "./homepage";
+@import "./productpage";
 @import "./richtext";
 @import "./img_w_txt";
 @import "./footer";

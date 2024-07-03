@@ -5,6 +5,7 @@ import { ShopContext } from '../context/shopContext'
 import Hero from '../components/Hero'
 import RichText from '../components/RichText'
 import ImageWithText from '../components/ImageWithText'
+import GridSection from '../components/GridSection'
 
 const fetchUnsplashImg = async (num) => {
   let key = process.env.REACT_APP_UNSPLASH_ACCESS_KEY
@@ -99,22 +100,8 @@ const HomePage = () => {
       {/* Curated to global trends, our tech-driven styles open your eyes to the future of fashion. */}
       <RichText className='style_1 default_bg' heading="The Future of Fashion & Beyond" text="Embrace tomorrow's trends, today. Our meticulously curated collection seamlessly blends cutting-edge fashion technology with the hottest global styles, designed to elevate your look and redefine your expectations." />
 
-      <Grid className="grid_section" templateColumns={['repeat(1fr)', 'repeat(2, 1fr)', 'repeat(3, 1fr)', 'repeat(4, 1fr)']}>
-        {gridItems.map(item => (
-          <Link className="grid_box_link" to={`/products/${item?.handle ?? ''}`} key={item?.id} >
-            <Box className="grid_box_box" _hover={{ opacity: '80%' }} textAlign="center" position="relative">
-              <Image
-                className="grid_box_img"
-                src={item?.img}
-              />
-              <div className="grid_txt_container">
-                <Text className="grid_box_txt product_title focus-in-contract-bck" fontWeight="bold" position="absolute" bottom="10%" w="100%">{item?.title}</Text>
-                {/* <Text className="grid_box_txt" color="gray.500" position="absolute" bottom="5%" w="100%">${item?.price}</Text> */}
-              </div>
-            </Box>
-          </Link>
-        ))}
-      </Grid>
+      <GridSection gridItems={gridItems} />
+
       <RichText className='default_bg' heading="Treat yourself!" text="The cherry blossom whispers its beauty, reminding us to savor the fleeting moments of life. In the stillness of the meditation hall, a single breath becomes a vast ocean of awareness." />
       <ImageWithText
         button
