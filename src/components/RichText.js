@@ -10,7 +10,7 @@ const RichText = ({ heading, text, className, addImg }) => {
     <Box className={`richtext_container ${className}`} p={4}>
       <Center className='richtext_inner' display="flex" flexDir="column" textAlign="center">
 
-        {(addImg != null) ? <img className='addedImg' src={addImg} will alt="" /> : ''}
+        {(addImg != null) ? <img className='addedImg' src={addImg} alt="" /> : ''}
 
         {
           heading ?

@@ -1,4 +1,28 @@
 .grid_section {
+  /* ----------------- hover effect ----------------- */
+  .grid_txt_container {
+    &::before {
+      content: "";
+      background: transparent;
+      transition: opacity 1s ease-in-out;
+      opacity: 0;
+      @apply w-full h-full absolute top-0 right-0 bottom-0 left-0;
+    }
+    @apply w-full h-[30%] absolute bottom-0;
+  }
+  .grid_box_link {
+    &:hover {
+      .grid_txt_container {
+        &::before {
+          opacity: 1;
+          // background-position: bottom 0px;
+          background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+        }
+      }
+    }
+  }
+  /* END: ----------------- hover effect ----------------- */
+
   @apply max-w-full md:max-w-[1300px] m-auto;
   .grid_box_link {
     @apply border-2 sm:border-[5px] md:border-[10px] border-solid border-[var(--bg-color)];
@@ -7,15 +31,10 @@
     }
     .grid_txt_container {
       .grid_box_txt {
-        @apply text-[12px] font-thin;
+        @apply text-[12px] font-semibold;
         &.product_title {
-          @apply w-[200px] sm:w-[180px] md:sm:w-[140px] lg:w-[250px];
-          white-space: nowrap; /* Prevent text wrapping */
-          overflow: hidden; /* Hide overflowing content */
-          text-overflow: ellipsis;
-          margin: auto;
-          left: 0;
-          right: 0;
+          @apply w-[200px] sm:w-[180px] md:sm:w-[140px] lg:w-[250px]  
+          whitespace-nowrap overflow-hidden text-ellipsis m-auto left-0 right-0;
         }
       }
     }
