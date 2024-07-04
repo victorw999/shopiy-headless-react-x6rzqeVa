@@ -1,14 +1,13 @@
+@import "./_grid_section.css";
+@import "./_homepage.css";
+@import "./_productpage.css";
+@import "./_richtext.css";
+@import "./_img_w_txt.css";
+@import "./_footer";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import "./btn";
-@import "./grid_section";
-@import "./homepage";
-@import "./productpage";
-@import "./richtext";
-@import "./img_w_txt";
-@import "./footer";
 
 :root {
   --font-color: black;

@@ -1,0 +1,11 @@
+.img_w_txt {
+  .img_w_txt__inner {
+    max-height: none;
+    @media screen and (min-width: 480px) {
+      max-height: 500px;
+    }
+    p {
+      max-width: 435px;
+    }
+  }
+}

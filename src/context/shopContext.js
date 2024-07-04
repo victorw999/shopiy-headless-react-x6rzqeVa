@@ -61,6 +61,8 @@ class ShopProvider extends Component {
     }
   };
 
+
+
   fetchCheckout = async (checkoutId) => {
     // checkoutId expired: the checkoutId may expire. If this happens, a new checkout ID will need to be created.
     this.client.checkout

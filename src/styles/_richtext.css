@@ -5,12 +5,13 @@
     @apply max-w-full md:max-w-[550px] m-auto;
     .richtext_txt_head {
       @apply p-5 md:py-5 md:pt-10 md:px-0 text-[20px] md:text-[36px];
+      foo:bar;
     }
-  } //.richtext_inner
+  }  
 
   .richtext_txt_body {
     @apply px-0 xs:px-5 sm:px-7;
-    // add click to reveal animation
+    /* add click to reveal animation */
     --lineheight: 24px;
     --pad-bottom: 2.5rem;
 
@@ -31,7 +32,6 @@
       left: 0;
       width: 100%;
       height: calc(100% - var(--lineheight) * 2);
-      // background: linear-gradient(to bottom, var(--bg-color-rgba-95) 0%, var(--bg-color-rgba-100) 100%);
       transition: opacity 0.7s ease-in-out;
       opacity: 1;
     }
@@ -44,10 +44,21 @@
         opacity: 0;
       }
     }
-  } //.richtext_txt_body
+  } 
+  /* .richtext_txt_body */
 
+  /* zen circle image */
   .addedImg {
-    @apply w-[66px] h-[66px] mt-[60px] mb-[20px] md:w-[100px] md:h-[100px] md:mt-[100px] opacity-[0.1];
+      width: 66px;
+      height: 66px;
+      margin-top: 60px;
+      margin-bottom: 20px;
+      opacity: 0.1;
+      @media (min-width: 768px) {
+        width: 100px;
+        height: 100px;
+        margin-top: 100px;
+      }
   }
 
   &.style_1 {
@@ -60,7 +71,8 @@
   &.default_bg {
     background-color: var(--bg-color);
   }
-} //richtext_container
+} 
+/* richtext_container */
 
 .richtext_txt_body {
   .default_bg & {
